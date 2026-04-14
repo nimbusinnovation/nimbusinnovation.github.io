@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atal Tinkering Labs — Nimbus Innovations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f5f5f3;--bg2:#eeeeec;--white:#ffffff;--red:#b91c1c;--red-soft:rgba(185,28,28,0.07);--navy:#0f172a;--navy2:#1e3a8a;--ink:#111111;--ink2:#333333;--ink3:#555555;--border:#ddd;--border2:#e8e8e6;--shadow:0 2px 16px rgba(0,0,0,0.06);--shadow2:0 4px 28px rgba(0,0,0,0.1);--radius:8px;--radius2:12px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink2);line-height:1.7;overflow-x:hidden}
+h1,h2,h3,h4{color:var(--ink);font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+p{color:var(--ink3);line-height:1.75}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+section{padding:5rem 5vw}
+.section-label{font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:0.6rem}
+.section-title{font-size:clamp(1.6rem,2.8vw,2.2rem);color:var(--ink);margin-bottom:1rem;max-width:640px}
+.section-sub{font-size:0.97rem;color:var(--ink3);max-width:560px;line-height:1.75;margin-bottom:2.5rem}
+.btn{display:inline-block;padding:12px 28px;border-radius:var(--radius);font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:none}
+.btn-dark{background:var(--navy);color:var(--white)}
+.btn-dark:hover{background:var(--navy2);transform:translateY(-1px)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5vw;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,245,243,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border2);transition:box-shadow 0.3s}
+nav.scrolled{box-shadow:var(--shadow)}
+.nav-logo{font-family:'Fugaz One',cursive;font-size:1.15rem;letter-spacing:0.04em;color:var(--red)}
+.nav-menu{display:flex;align-items:center;gap:2rem}
+.nav-menu>li{position:relative}
+.nav-menu>li>a{font-size:0.85rem;font-weight:500;color:var(--ink2);transition:color 0.2s;padding:4px 0;position:relative}
+.nav-menu>li>a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--red);transition:width 0.2s}
+.nav-menu>li>a:hover::after,.active::after{width:100%!important}
+.nav-menu>li>a:hover,.active{color:var(--red)!important}
+.has-dropdown>a{display:flex;align-items:center;gap:4px}
+.caret{font-size:0.55rem;opacity:0.45}
+.dropdown{position:absolute;top:calc(100% + 14px);left:50%;background:var(--white);border:1px solid var(--border2);border-radius:var(--radius2);min-width:190px;box-shadow:var(--shadow2);opacity:0;pointer-events:none;transition:opacity 0.18s,transform 0.18s;transform:translateX(-50%) translateY(-6px)}
+.has-dropdown:hover .dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.dropdown li a{display:block;padding:10px 18px;font-size:0.83rem;color:var(--ink2);transition:background 0.15s,color 0.15s}
+.dropdown li a:hover{background:var(--bg);color:var(--red)}
+.dropdown li:first-child a{border-radius:var(--radius2) var(--radius2) 0 0}
+.dropdown li:last-child a{border-radius:0 0 var(--radius2) var(--radius2)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-toggle span{width:22px;height:2px;background:var(--ink);border-radius:2px;display:block}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border2);padding:1.2rem 5vw;z-index:999;box-shadow:var(--shadow2)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:9px 0;font-size:0.88rem;color:var(--ink2);border-bottom:1px solid var(--border2);transition:color 0.2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--red)}
+.mob-sub a{padding-left:1rem;font-size:0.82rem;color:var(--ink3)}
+footer{background:var(--navy);color:rgba(255,255,255,0.45);padding:2.5rem 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:0.8rem}
+.f-logo{font-family:'Fugaz One',cursive;font-size:1rem;color:rgba(255,255,255,0.85)}
+.f-logo span{color:var(--red)}
+.page-header{background:var(--navy);color:var(--white);padding:7rem 5vw 4rem;margin-top:64px}
+.page-header .section-label{color:rgba(255,255,255,0.45)}
+.page-header h1{color:var(--white);max-width:700px;font-size:clamp(2rem,4vw,3rem)}
+.page-header p{color:rgba(255,255,255,0.6);max-width:580px;margin-top:1rem;font-weight:300;font-size:1.05rem}
+.divider{height:1px;background:var(--border2);margin:0 5vw}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.col-card{background:var(--white);border:1px solid var(--border2);border-radius:var(--radius2);padding:2.5rem}
+.col-card h3{font-size:1.2rem;margin-bottom:0.8rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border2)}
+.point-list{display:flex;flex-direction:column;gap:9px;margin-top:0.8rem}
+.point-list li{display:flex;align-items:flex-start;gap:10px;font-size:0.9rem;color:var(--ink3)}
+.point-list li::before{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:8px}
+.sub-heading{font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin:1.5rem 0 0.5rem}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.card{background:var(--white);border:1px solid var(--border2);border-radius:var(--radius2);padding:2rem;transition:transform 0.2s,box-shadow 0.2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow2)}
+.card-icon{font-size:1.6rem;margin-bottom:1rem}
+.card h3{font-size:1rem;margin-bottom:0.4rem;color:var(--ink)}
+.card p{font-size:0.86rem;color:var(--ink3)}
+.quote-center{background:var(--bg2);padding:4rem 5vw;text-align:center;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.quote-center p{font-size:clamp(1rem,2.2vw,1.3rem);color:var(--ink2);font-style:italic;font-weight:500;max-width:700px;margin:0 auto}
+.cta-section{background:var(--navy);padding:5rem 5vw;text-align:center}
+.cta-section h2{color:var(--white);font-size:1.8rem;margin-bottom:0.5rem}
+.cta-section p{color:rgba(255,255,255,0.5);margin-bottom:2rem;font-size:0.95rem}
+.cta-tile{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius2);padding:2.5rem;max-width:560px;margin:2rem auto 0;text-align:center}
+.cta-tile h3{color:var(--white);font-size:1.2rem;margin-bottom:0.6rem}
+.cta-tile p{color:rgba(255,255,255,0.45);font-size:0.88rem;margin-bottom:1.5rem}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:860px){.nav-menu{display:none}.nav-toggle{display:flex}.two-col{grid-template-columns:1fr}section{padding:3.5rem 5vw}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">NIMBUS INNOVATIONS</a>
+  <ul class="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li class="has-dropdown">
+      <a href="#" class="active">Programs <span class="caret">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="workshops.html">Workshops</a></li>
+        <li><a href="labs.html">Innovation Labs</a></li>
+        <li><a href="collaboration.html">Collaboration</a></li>
+        <li><a href="atl.html" style="color:var(--red)">Atal Tinkering Labs</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="vision.html">Vision</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="#" style="font-weight:600">Programs</a>
+  <div class="mob-sub">
+    <a href="workshops.html">Workshops</a>
+    <a href="labs.html">Innovation Labs</a>
+    <a href="collaboration.html">Collaboration</a>
+    <a href="atl.html">Atal Tinkering Labs</a>
+  </div>
+  <a href="about.html">About</a>
+  <a href="vision.html">Vision</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="gallery.html">Gallery</a>
+</div>
+
+<div class="page-header">
+  <div class="section-label">Programs</div>
+  <h1>Atal Tinkering Labs</h1>
+  <p>Aligning with the vision of Atal Innovation Mission (AIM) by NITI Aayog, Nimbus Innovations works closely with institutions to strengthen and effectively utilize Atal Tinkering Labs — ensuring they become active centers of innovation, creativity, and hands-on learning.</p>
+</div>
+
+<!-- TWO TRACKS -->
+<section>
+  <div class="reveal" style="margin-bottom:3rem">
+    <div class="section-label">Our ATL Support</div>
+    <h2 class="section-title">Two distinct models<br/>for two different needs.</h2>
+    <p class="section-sub">Whether your school already has an ATL or is planning to establish one, we provide structured, end-to-end support aligned with AIM's vision.</p>
+  </div>
+  <div class="two-col">
+    <div class="col-card reveal">
+      <h3>Supporting Existing ATL Labs</h3>
+      <p style="font-size:0.9rem;margin-bottom:1rem">For institutions that already have an ATL setup, we focus on maximizing its potential and ensuring it remains an active, productive environment.</p>
+      <div class="sub-heading">We Help You</div>
+      <ul class="point-list">
+        <li>Improve utilization of existing lab infrastructure</li>
+        <li>Conduct structured innovation sessions for students</li>
+        <li>Encourage hands-on learning and systematic experimentation</li>
+        <li>Build a strong culture of creativity and problem-solving</li>
+      </ul>
+      <div class="sub-heading">Operational Support</div>
+      <ul class="point-list">
+        <li>Continuous supply of essential lab components — sensors, development boards, modules, and consumables</li>
+        <li>Support in maintaining an organized and efficient lab environment</li>
+        <li>Ensuring the lab remains consistently active and productive</li>
+      </ul>
+    </div>
+    <div class="col-card reveal">
+      <h3>Setting Up Innovation Labs</h3>
+      <p style="font-size:0.9rem;margin-bottom:1rem">For institutions planning to establish their own innovation lab or ATL, we provide complete end-to-end support — from initial design through to ongoing operations.</p>
+      <div class="sub-heading">We Assist With</div>
+      <ul class="point-list">
+        <li>Lab design and setup tailored to institutional needs and available space</li>
+        <li>Installation of required tools and systems — electronics, fabrication tools, and more</li>
+        <li>Structured implementation and usage planning for the lab</li>
+        <li>Continuous operational support and maintenance</li>
+        <li>Regular supply of consumable materials for ongoing activities</li>
+      </ul>
+      <div class="sub-heading">Our Focus</div>
+      <p style="font-size:0.88rem;color:var(--ink3);margin-top:0.5rem">Not just setting up the lab — ensuring it is actively used and delivers real, measurable impact for students.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY IT MATTERS -->
+<section>
+  <div class="reveal">
+    <div class="section-label">Why This Matters</div>
+    <h2 class="section-title">What Atal Tinkering Labs<br/>are meant to achieve.</h2>
+    <p class="section-sub">ATLs were established under Atal Innovation Mission to foster innovation at the school level. With the right guidance and execution, these labs can meaningfully transform student learning.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <div class="card-icon">🔬</div>
+      <h3>Transform How Students Learn</h3>
+      <p>Move students from passive consumption of knowledge to active creation — building, testing, and refining ideas in a structured environment.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-icon">💡</div>
+      <h3>Encourage Experimentation</h3>
+      <p>Create a safe, structured space where students feel empowered to try new ideas, make mistakes, and learn from them.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-icon">🛠️</div>
+      <h3>Build Practical Skills Early</h3>
+      <p>Students who develop hands-on skills at the school level are significantly better prepared for higher education and professional environments.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-icon">🌱</div>
+      <h3>Foundation for Future Innovators</h3>
+      <p>Early exposure to innovation tools and methodologies creates a strong foundation for the next generation of India's problem-solvers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-center reveal">
+  <p>"Enabling institutions to fully realize the vision of innovation-driven education."</p>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="reveal">
+    <div class="section-label" style="color:rgba(255,255,255,0.45)">Get Started</div>
+    <h2>Strengthen and activate innovation<br/>in your institution.</h2>
+    <p>Talk to us about how we can support your ATL or help you establish a new innovation lab.</p>
+    <a href="index.html#contact" class="btn" style="background:var(--white);color:var(--navy)">Get Started →</a>
+    <div class="cta-tile">
+      <h3>Activate Your Innovation Lab</h3>
+      <p>Partner with us to build and manage a fully functional innovation environment aligned with AIM's vision.</p>
+      <a href="index.html#contact" class="btn" style="background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.18)">Contact Us →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="f-logo">NIMBUS <span>INNOVATIONS</span></span>
+  <span>© 2025 Nimbus Innovations. All rights reserved.</span>
+  <span>Jhansi, Uttar Pradesh, India</span>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);});
+document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('mobileMenu').classList.toggle('open');});
+document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open')));
+const ro=new IntersectionObserver((e)=>{e.forEach((x,i)=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('visible'),i*80);ro.unobserve(x.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vision — Nimbus Innovations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f5f5f3;--bg2:#eeeeec;--white:#ffffff;--red:#b91c1c;--red-soft:rgba(185,28,28,0.07);--navy:#0f172a;--navy2:#1e3a8a;--ink:#111111;--ink2:#333333;--ink3:#555555;--border:#ddd;--border2:#e8e8e6;--shadow:0 2px 16px rgba(0,0,0,0.06);--shadow2:0 4px 28px rgba(0,0,0,0.1);--radius:8px;--radius2:12px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink2);line-height:1.7;overflow-x:hidden}
+h1,h2,h3,h4{color:var(--ink);font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+p{color:var(--ink3);line-height:1.75}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+section{padding:5rem 5vw}
+.section-label{font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:0.6rem}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5vw;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,245,243,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border2);transition:box-shadow 0.3s}
+nav.scrolled{box-shadow:var(--shadow)}
+.nav-logo{font-family:'Fugaz One',cursive;font-size:1.15rem;letter-spacing:0.04em;color:var(--red)}
+.nav-menu{display:flex;align-items:center;gap:2rem}
+.nav-menu>li{position:relative}
+.nav-menu>li>a{font-size:0.85rem;font-weight:500;color:var(--ink2);transition:color 0.2s;padding:4px 0;position:relative}
+.nav-menu>li>a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--red);transition:width 0.2s}
+.nav-menu>li>a:hover::after,.active::after{width:100%!important}
+.nav-menu>li>a:hover,.active{color:var(--red)!important}
+.has-dropdown>a{display:flex;align-items:center;gap:4px}
+.caret{font-size:0.55rem;opacity:0.45}
+.dropdown{position:absolute;top:calc(100% + 14px);left:50%;background:var(--white);border:1px solid var(--border2);border-radius:var(--radius2);min-width:190px;box-shadow:var(--shadow2);opacity:0;pointer-events:none;transition:opacity 0.18s,transform 0.18s;transform:translateX(-50%) translateY(-6px)}
+.has-dropdown:hover .dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.dropdown li a{display:block;padding:10px 18px;font-size:0.83rem;color:var(--ink2);transition:background 0.15s,color 0.15s}
+.dropdown li a:hover{background:var(--bg);color:var(--red)}
+.dropdown li:first-child a{border-radius:var(--radius2) var(--radius2) 0 0}
+.dropdown li:last-child a{border-radius:0 0 var(--radius2) var(--radius2)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-toggle span{width:22px;height:2px;background:var(--ink);border-radius:2px;display:block}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border2);padding:1.2rem 5vw;z-index:999;box-shadow:var(--shadow2)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:9px 0;font-size:0.88rem;color:var(--ink2);border-bottom:1px solid var(--border2);transition:color 0.2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--red)}
+.mob-sub a{padding-left:1rem;font-size:0.82rem;color:var(--ink3)}
+footer{background:var(--navy);color:rgba(255,255,255,0.45);padding:2.5rem 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:0.8rem}
+.f-logo{font-family:'Fugaz One',cursive;font-size:1rem;color:rgba(255,255,255,0.85)}
+.f-logo span{color:var(--red)}
+.divider{height:1px;background:var(--border2);margin:0 5vw}
+
+/* VISION-SPECIFIC */
+.vision-hero{background:var(--navy);margin-top:64px;padding:8rem 5vw 6rem;text-align:center;position:relative;overflow:hidden}
+.vision-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:32px 32px}
+.vision-hero .section-label{color:rgba(255,255,255,0.45)}
+.vision-hero h1{color:var(--white);font-size:clamp(2rem,5vw,3.8rem);max-width:800px;margin:0.5rem auto 1.5rem;line-height:1.1}
+.vision-hero p{color:rgba(255,255,255,0.58);max-width:600px;margin:0 auto;font-size:1.05rem;font-weight:300;line-height:1.8}
+
+.inspiration{background:var(--bg2);padding:5rem 5vw;text-align:center}
+.insp-text{max-width:700px;margin:0 auto}
+.insp-text .section-label{text-align:left}
+.insp-text p{font-size:0.97rem;color:var(--ink3);margin-bottom:2rem;text-align:left;line-height:1.8}
+.kalam-quote{background:var(--white);border:1px solid var(--border2);border-radius:var(--radius2);padding:2.5rem 3rem;margin-top:2rem;position:relative}
+.kalam-quote::before{content:'"';position:absolute;top:-0.5rem;left:2rem;font-size:5rem;color:var(--red);opacity:0.12;font-family:Georgia,serif;line-height:1}
+.kalam-quote blockquote{font-size:clamp(1.1rem,2.2vw,1.35rem);color:var(--ink);font-style:italic;font-weight:500;line-height:1.55;position:relative;z-index:1}
+.kalam-quote cite{display:block;margin-top:1.2rem;font-size:0.82rem;font-weight:600;color:var(--ink3);font-style:normal;letter-spacing:0.06em;text-transform:uppercase}
+
+.aim-section{padding:5rem 5vw}
+.aim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:2.5rem}
+.aim-item{background:var(--white);border:1px solid var(--border2);border-radius:var(--radius2);padding:2rem;transition:transform 0.2s,box-shadow 0.2s}
+.aim-item:hover{transform:translateY(-4px);box-shadow:var(--shadow2)}
+.aim-item h3{font-size:1rem;margin-bottom:0.4rem}
+.aim-item p{font-size:0.87rem;color:var(--ink3)}
+
+.impact-section{background:var(--navy);padding:5rem 5vw}
+.impact-section .section-label{color:rgba(255,255,255,0.45)}
+.impact-section h2{color:var(--white);max-width:600px;margin-bottom:2.5rem}
+.impact-list{display:flex;flex-direction:column;gap:1.2rem}
+.impact-item{display:flex;gap:1.5rem;align-items:flex-start;padding:1.4rem;border-radius:var(--radius2);border:1px solid rgba(255,255,255,0.07);transition:border-color 0.2s,background 0.2s}
+.impact-item:hover{border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.03)}
+.impact-num{font-family:'Fugaz One',cursive;font-size:1.8rem;color:rgba(185,28,28,0.5);min-width:44px;line-height:1}
+.impact-item h4{font-size:0.95rem;color:rgba(255,255,255,0.82);font-weight:600;margin-bottom:4px}
+.impact-item p{font-size:0.87rem;color:rgba(255,255,255,0.42);line-height:1.65}
+
+.closing-line{background:var(--bg2);padding:4.5rem 5vw;text-align:center;border-top:1px solid var(--border2)}
+.closing-line p{font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--ink);font-weight:600;max-width:700px;margin:0 auto;letter-spacing:-0.01em}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:860px){.nav-menu{display:none}.nav-toggle{display:flex}section{padding:3.5rem 5vw}.kalam-quote{padding:2rem}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">NIMBUS INNOVATIONS</a>
+  <ul class="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li class="has-dropdown">
+      <a href="#">Programs <span class="caret">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="workshops.html">Workshops</a></li>
+        <li><a href="labs.html">Innovation Labs</a></li>
+        <li><a href="collaboration.html">Collaboration</a></li>
+        <li><a href="atl.html">Atal Tinkering Labs</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="vision.html" class="active">Vision</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="#" style="font-weight:600">Programs</a>
+  <div class="mob-sub">
+    <a href="workshops.html">Workshops</a>
+    <a href="labs.html">Innovation Labs</a>
+    <a href="collaboration.html">Collaboration</a>
+    <a href="atl.html">Atal Tinkering Labs</a>
+  </div>
+  <a href="about.html">About</a>
+  <a href="vision.html">Vision</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="gallery.html">Gallery</a>
+</div>
+
+<!-- VISION HERO -->
+<div class="vision-hero">
+  <div class="section-label reveal">Our Vision</div>
+  <h1 class="reveal">Building India's largest innovation<br/>ecosystem — from the ground up.</h1>
+  <p class="reveal">Nimbus Innovations envisions a future where every student has access to practical knowledge, real-world tools, and the opportunity to innovate from an early stage — regardless of geography or background.</p>
+</div>
+
+<!-- INSPIRATION -->
+<section class="inspiration">
+  <div class="insp-text">
+    <div class="reveal">
+      <div class="section-label">Inspiration</div>
+      <h2 style="font-size:1.8rem;margin-bottom:1rem;text-align:left">Rooted in a larger national purpose.</h2>
+      <p>Nimbus Innovations draws deep inspiration from the vision of Dr. A. P. J. Abdul Kalam — a man who believed, above all else, that the transformation of India would come from the minds and hands of its young people. His belief was not theoretical. It was grounded in the conviction that when students are given the right environment, the right tools, and the right guidance, they are capable of extraordinary things.</p>
+      <p>That belief is the foundation on which every program, every partnership, and every decision at Nimbus Innovations is built.</p>
+    </div>
+    <div class="kalam-quote reveal">
+      <blockquote>Dream, dream, dream. Dreams transform into thoughts and thoughts result in action.</blockquote>
+      <cite>— Dr. A. P. J. Abdul Kalam</cite>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT WE AIM TO BUILD -->
+<section class="aim-section">
+  <div class="reveal">
+    <div class="section-label">What We Aim To Build</div>
+    <h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem);margin-bottom:1rem">A nationwide ecosystem<br/>of innovation in education.</h2>
+    <p style="max-width:560px;color:var(--ink3);font-size:0.97rem">Our vision is not limited to individual schools or programs. It is a long-term, systematic effort to create an environment where innovation is part of everyday learning across India.</p>
+  </div>
+  <div class="aim-grid">
+    <div class="aim-item reveal">
+      <h3>Innovation as Everyday Learning</h3>
+      <p>A future where building, experimenting, and creating is as normal as reading — integrated into the daily experience of every student.</p>
+    </div>
+    <div class="aim-item reveal">
+      <h3>Students Who Build, Not Just Study</h3>
+      <p>Students who don't just understand concepts, but actively apply them to design and build real solutions to real problems.</p>
+    </div>
+    <div class="aim-item reveal">
+      <h3>Institutions as Centers of Creativity</h3>
+      <p>Schools and colleges that are known not just for academic results, but for producing students with genuine innovation capability.</p>
+    </div>
+    <div class="aim-item reveal">
+      <h3>Practical Knowledge Valued Equally</h3>
+      <p>A system where the ability to build and create is recognized and valued as much as the ability to recall and recite.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LONG-TERM IMPACT -->
+<section class="impact-section">
+  <div class="section-label reveal">Long-Term Impact</div>
+  <h2 class="reveal">What we are working<br/>to achieve over time.</h2>
+  <div class="impact-list">
+    <div class="impact-item reveal">
+      <div class="impact-num">01</div>
+      <div>
+        <h4>Enable Students to Think Beyond Textbooks</h4>
+        <p>Develop the habit of questioning, exploring, and experimenting — not just absorbing information as it is given.</p>
+      </div>
+    </div>
+    <div class="impact-item reveal">
+      <div class="impact-num">02</div>
+      <div>
+        <h4>Foster a Generation of Problem-Solvers</h4>
+        <p>Create students who approach challenges with structured thinking, creative solutions, and the ability to execute ideas into reality.</p>
+      </div>
+    </div>
+    <div class="impact-item reveal">
+      <div class="impact-num">03</div>
+      <div>
+        <h4>Strengthen India's Innovation Position</h4>
+        <p>Contribute to India's long-term standing as a nation that produces not just skilled workers, but genuine innovators and creators.</p>
+      </div>
+    </div>
+    <div class="impact-item reveal">
+      <div class="impact-num">04</div>
+      <div>
+        <h4>Create a System Where Ideas Are Realized</h4>
+        <p>Build an environment where student ideas are not dismissed or left unexplored — but are encouraged, tested, refined, and realized.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING LINE -->
+<div class="closing-line reveal">
+  <p>"From classrooms to creation — redefining how students learn and innovate."</p>
+</div>
+
+<footer>
+  <span class="f-logo">NIMBUS <span>INNOVATIONS</span></span>
+  <span>© 2025 Nimbus Innovations. All rights reserved.</span>
+  <span>Jhansi, Uttar Pradesh, India</span>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);});
+document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('mobileMenu').classList.toggle('open');});
+document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open')));
+const ro=new IntersectionObserver((e)=>{e.forEach((x,i)=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('visible'),i*80);ro.unobserve(x.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
